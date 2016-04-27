@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{ title }}</title>
+	<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}" media="screen">
+</head>
+<body>
+	<form action="/treatment" method="post">
+		{% csrf_token %}
+		<!-- Excel Files 97-2003 -->
+		<!-- <input type="file" accept="application/vnd.ms-excel" /> -->
+		<!-- <p>Загрузите файл Excel 2007+ версии:</p> -->
+		{{ form }}
+		<br><br>
+		{{ text }}
+		<!-- Excel Files 2007+ -->
+		<!-- <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" /><br> -->
+		{% if title %}
+		<input type="submit" name="submit" class="btn" value="Загрузить">
+		{% endif %}
+	</form>
+</body>
+</html>

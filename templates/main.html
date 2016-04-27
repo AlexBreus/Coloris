@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>{{ title }}</title>
+	<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}" media="screen">
+	{% block css %}{% endblock %}
+<body>
+<div class="container">
+<h2>{{ title }}</h2>
+{% include 'left_nav.html' %}
+
+<div class="col-md-10">{% block content %}{% endblock %}</div>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-beta.2/angular.min.js"></script>
+<script type="text/javascript">
+var myApp = angular.module('myApp', [], function($interpolateProvider) {
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+});
+</script>
+</body>
+</html>

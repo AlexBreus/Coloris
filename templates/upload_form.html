@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+    {% if form %}
+    {% load bootstrap %}
+    <form class="form-horizontal" role="form" action="" enctype="multipart/form-data"  method="post">
+        <input type="hidden" name="step" value="2">
+        <table>
+            {{ form|bootstrap }}
+        </table>
+        {% csrf_token %}
+        <input type="submit" class="btn btn-default" value="Загрузить">
+    </form>
+    {% else %}
+
+    <form action="" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="step" value="2">
+    <input type="hidden" name="next" value="3">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>DB</th>
+                <th>Excel file</th>
+            </tr>            
+        </thead>
+        <tbody>
+        {% for column in db_column %}
+        <tr>
+            <td>{{ column }}</td>
+            <td>
+                <select name="col_{{ forloop.counter }}">
+                {% for first_row in excel_arr.0 %}
+                    {% if forloop.counter == forloop.parentloop.counter %}
+                    <option selected="selected">{{ first_row }}</option>
+                    {% else %}
+                    <option>{{ first_row }}</option>
+                    {% endif %}
+                {% endfor %}
+                </select>                
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="2" align="center"><input type="submit" class="btn btn-default" value="Сохранить" width="100%"></td>
+        </tr>
+        </tbody>
+    </table>
+    </form>
+
+    {% endif %}
+
+{% endblock %}

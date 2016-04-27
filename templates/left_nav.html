@@ -1,0 +1,5 @@
+
+<div class="list-group col-md-2">
+  <a href="{% url 'upload' %}" class="list-group-item {% if request.get_full_path == '/upload/' %}active{% endif %}">Импортировать</a>
+  <a href="{% url 'users' %}" class="list-group-item {% if request.get_full_path == '/users/' %}active{% endif %}">Пользователи</a>
+</div>
